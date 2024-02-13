@@ -1,6 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.devtools.ksp") version "1.9.22-1.0.16"
 }
 
 android {
@@ -40,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     packaging {
         resources {
@@ -51,19 +55,32 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(libs.ktx)
+    implementation(libs.lifecycle)
+    implementation(libs.viewmodel)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.graphics)
+    implementation(libs.compose.tooling)
+    implementation(libs.compose.material)
+    implementation(libs.compose.navigation)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.coroutines)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compose)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    kapt(libs.hilt.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
+    implementation(libs.ksp)
+    debugImplementation(libs.compose.tooling.preview)
+    debugImplementation(libs.compose.test.manifest)
 }

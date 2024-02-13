@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DnsTestQuest</string>
+
+    <!-- Sign In Screen -->
+    <string name="sign_in_topbar_title">Вход</string>
+    <string name="sign_in_login_placeholder">Логин</string>
+    <string name="sign_in_password_placeholder">Пароль</string>
+    <string name="sign_in_button_title">Войти</string>
 </resources>
