@@ -1,16 +1,22 @@
 package com.mikhail.dnstestquest.presentation.ui.screens.sign_in
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.mikhail.dnstestquest.data.repositories.FirestoreRepository
+import com.mikhail.dnstestquest.data.repositories.LoginResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInScreenViewModel @Inject constructor(): ViewModel() {
+class SignInScreenViewModel @Inject constructor(
+    private val firestoreRepository: FirestoreRepository
+): ViewModel() {
     private val _uiAction = Channel<SignInAction>()
     val uiAction = _uiAction.receiveAsFlow()
 
@@ -49,8 +55,22 @@ class SignInScreenViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    fun onSignInClick() {
-        // TODO
+    fun onSignInClick(
+        login: String,
+        password: String,
+    ) {
+        viewModelScope.launch {
+            val loginResult = firestoreRepository.login(
+                login = login,
+                password = password
+            )
+
+            when (loginResult) {
+                is LoginResult.StatusSuccess -> TODO()
+                LoginResult.StatusFailure -> TODO()
+                LoginResult.StatusException -> TODO()
+            }
+        }
     }
 }
 

@@ -123,7 +123,10 @@ fun SignInScreen(
             text = stringResource(R.string.sign_in_button_title),
             enabled = !uiState.isError,
             onClick = {
-                viewModel.onSignInClick()
+                viewModel.onSignInClick(
+                    login = uiState.login,
+                    password = uiState.password
+                )
             }
         )
 

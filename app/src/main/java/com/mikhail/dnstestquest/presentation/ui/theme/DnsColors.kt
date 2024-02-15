@@ -15,7 +15,7 @@ data class DnsColors(
     val black: Color
 )
 
-fun ProvideEffectiveColors(): DnsColors {
+fun ProvideDnsColors(): DnsColors {
     return DnsColors(
         white = Color(0xFFFFFFFF),
         grey = Color(0xFFA0A1A3),
@@ -30,5 +30,5 @@ fun ProvideEffectiveColors(): DnsColors {
 }
 
 val LocalDnsColors = staticCompositionLocalOf<DnsColors> {
-    error { "LocalEffectiveColors not provided" }
+    error { "LocalDnsColors not provided" }
 }

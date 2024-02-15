@@ -3,19 +3,18 @@ package com.mikhail.dnstestquest.presentation.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun DnsTheme(
     content: @Composable () -> Unit
 ) {
-    val effectiveTypography = ProvideEffectiveTypography()
-    val effectiveColors = ProvideEffectiveColors()
+    val dnsTypography = ProvideDnsTypography()
+    val dnsColors = ProvideDnsColors()
 
     MaterialTheme {
         CompositionLocalProvider(
-            LocalDnsColors provides effectiveColors,
-            LocalDnsTypography provides effectiveTypography,
+            LocalDnsColors provides dnsColors,
+            LocalDnsTypography provides dnsTypography,
             content = content
         )
     }

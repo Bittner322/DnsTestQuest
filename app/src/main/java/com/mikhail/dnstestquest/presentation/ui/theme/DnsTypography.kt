@@ -24,7 +24,7 @@ data class DnsTypography(
 )
 
 @Composable
-fun ProvideEffectiveTypography(): DnsTypography {
+fun ProvideDnsTypography(): DnsTypography {
 
     return DnsTypography(
         largeTitle1 = TextStyle(
@@ -79,5 +79,5 @@ fun ProvideEffectiveTypography(): DnsTypography {
 }
 
 val LocalDnsTypography = staticCompositionLocalOf<DnsTypography> {
-    error("LocalEffectiveTypography not initialized")
+    error("LocalDnsTypography not initialized")
 }

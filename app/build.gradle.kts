@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("com.google.devtools.ksp") version "1.9.22-1.0.16"
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -34,6 +35,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -54,7 +56,7 @@ android {
 }
 
 dependencies {
-
+    coreLibraryDesugaring(libs.desugar)
     implementation(libs.ktx)
     implementation(libs.lifecycle)
     implementation(libs.viewmodel)
@@ -81,6 +83,9 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
     implementation(libs.ksp)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    implementation(libs.coroutines.play.services)
     debugImplementation(libs.compose.tooling.preview)
     debugImplementation(libs.compose.test.manifest)
 }

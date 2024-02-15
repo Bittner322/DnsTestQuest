@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915732067050",
+    "project_id": "dnstestquest",
+    "storage_bucket": "dnstestquest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915732067050:android:aeab28f17387c5a6141d93",
+        "android_client_info": {
+          "package_name": "com.mikhail.dnstestquest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd-faKJGDnpSC95mcZbrL-7FuIv7Z-vdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
