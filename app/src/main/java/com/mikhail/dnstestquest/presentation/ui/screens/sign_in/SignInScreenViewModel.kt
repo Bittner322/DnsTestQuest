@@ -66,9 +66,15 @@ class SignInScreenViewModel @Inject constructor(
             )
 
             when (loginResult) {
-                is LoginResult.StatusSuccess -> TODO()
-                LoginResult.StatusFailure -> TODO()
-                LoginResult.StatusException -> TODO()
+                is LoginResult.StatusSuccess -> {
+                    _uiAction.trySend(SignInAction.NavToMainScreen)
+                }
+                is LoginResult.StatusFailure -> {
+                    _uiAction.trySend(SignInAction.ShowFailureMessage)
+                }
+                is LoginResult.StatusException -> {
+                    _uiAction.trySend(SignInAction.ShowExceptionMessage)
+                }
             }
         }
     }
@@ -76,4 +82,6 @@ class SignInScreenViewModel @Inject constructor(
 
 sealed class SignInAction {
     data object NavToMainScreen: SignInAction()
+    data object ShowFailureMessage: SignInAction()
+    data object ShowExceptionMessage: SignInAction()
 }

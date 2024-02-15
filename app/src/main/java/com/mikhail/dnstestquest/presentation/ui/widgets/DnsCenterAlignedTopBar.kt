@@ -1,5 +1,6 @@
 package com.mikhail.dnstestquest.presentation.ui.widgets
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -13,7 +14,8 @@ import com.mikhail.dnstestquest.presentation.ui.theme.defaults.DnsTopBarDefaults
 @Composable
 fun DnsCenterAlignedTopBar(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    actions: @Composable RowScope.() -> Unit = {}
 ) {
    CenterAlignedTopAppBar(
        modifier = modifier,
@@ -25,6 +27,7 @@ fun DnsCenterAlignedTopBar(
                overflow = TextOverflow.Ellipsis
            )
        },
+       actions = actions,
        colors = DnsTopBarDefaults.topBarColors()
    )
 }

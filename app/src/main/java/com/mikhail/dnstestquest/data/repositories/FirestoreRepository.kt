@@ -12,11 +12,11 @@ import kotlin.coroutines.suspendCoroutine
 class FirestoreRepository @Inject constructor(
     private val remoteDB: FirebaseFirestore,
 ) {
-    suspend fun getTasks(): List<Task> {
+    suspend fun getUserTasks(userId: String): List<Task> {
         return suspendCoroutine { continuation ->
             remoteDB.collection(CollectionsNames.TASKS)
-                .document("4nvUCtYGpWMuxxEHYAnB")
-                .collection("allTask")
+                .document(userId)
+                .collection(CollectionsNames.ALL_TASK)
                 .get()
                 .addOnSuccessListener { result ->
                     continuation.resume(
@@ -25,10 +25,15 @@ class FirestoreRepository @Inject constructor(
                             .map {
                                 Task(
                                     id = it.id,
-                                    title = "asd",
+                                    title = (it.data?.get("title") as? String).orEmpty(),
                                     description = (it.data?.get("description") as? String).orEmpty(),
-                                    status = TaskStatus.DONE,
-                                    created = LocalDateTime.now()
+                                    status = when (it.data?.get("status") as? String) {
+                                        "done" -> TaskStatus.DONE
+                                        "in_progress" -> TaskStatus.IN_PROGRESS
+                                        else -> TaskStatus.NEW
+                                    },
+                                    created = (it.data?.get("created") as? LocalDateTime)
+                                        ?: LocalDateTime.now()
                                 )
                             }
                     )
@@ -65,7 +70,7 @@ class FirestoreRepository @Inject constructor(
 }
 
 sealed class LoginResult {
-    data class StatusSuccess(val userId: String) : LoginResult()
-    data object StatusFailure : LoginResult()
-    data object StatusException : LoginResult()
+    data class StatusSuccess(val userId: String): LoginResult()
+    data object StatusFailure: LoginResult()
+    data object StatusException: LoginResult()
 }

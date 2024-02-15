@@ -1,5 +1,6 @@
 package com.mikhail.dnstestquest.presentation.ui.screens.sign_in
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
@@ -18,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,12 +40,27 @@ fun SignInScreen(
     viewModel: SignInScreenViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.uiAction.collect {
             when (it) {
                 SignInAction.NavToMainScreen -> {
                     navController.navigate(NavRoutes.home)
+                }
+                is SignInAction.ShowExceptionMessage -> {
+                    Toast.makeText(
+                        context,
+                        "Unexpected exception",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is SignInAction.ShowFailureMessage -> {
+                    Toast.makeText(
+                        context,
+                        "Wrong email or password",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -54,7 +72,8 @@ fun SignInScreen(
             .background(
                 color = DnsTheme.color.white
             )
-            .systemBarsPadding(),
+            .systemBarsPadding()
+            .imePadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         DnsCenterAlignedTopBar(

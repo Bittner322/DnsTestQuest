@@ -6,4 +6,11 @@
     <string name="sign_in_login_placeholder">Логин</string>
     <string name="sign_in_password_placeholder">Пароль</string>
     <string name="sign_in_button_title">Войти</string>
+
+    <!-- Home Screen -->
+    <string name="home_topbar_title">Задачи</string>
+    <string name="home_task_status_done">Выполнена</string>
+    <string name="home_task_status_in_progress">В работе</string>
+    <string name="home_task_status_new">Новое</string>
+    <string name="home_task_created_at">Создано</string>
 </resources>
