@@ -6,6 +6,8 @@
     <string name="sign_in_login_placeholder">Логин</string>
     <string name="sign_in_password_placeholder">Пароль</string>
     <string name="sign_in_button_title">Войти</string>
+    <string name="sign_in_wrong_login_or_password_toast">Неверный логин или пароль</string>
+    <string name="sign_in_unexpected_exception_toast">Неизвестная ошибка</string>
 
     <!-- Home Screen -->
     <string name="home_topbar_title">Задачи</string>
@@ -13,4 +15,5 @@
     <string name="home_task_status_in_progress">В работе</string>
     <string name="home_task_status_new">Новое</string>
     <string name="home_task_created_at">Создано</string>
+    <string name="home_tasks_count_title">Новых задач</string>
 </resources>

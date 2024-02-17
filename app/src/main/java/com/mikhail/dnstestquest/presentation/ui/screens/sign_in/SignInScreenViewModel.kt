@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mikhail.dnstestquest.data.repositories.FirestoreRepository
 import com.mikhail.dnstestquest.data.repositories.LoginResult
+import com.mikhail.dnstestquest.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInScreenViewModel @Inject constructor(
-    private val firestoreRepository: FirestoreRepository
+    private val firestoreRepository: FirestoreRepository,
+    private val userRepository: UserRepository
 ): ViewModel() {
     private val _uiAction = Channel<SignInAction>()
     val uiAction = _uiAction.receiveAsFlow()
@@ -68,11 +70,12 @@ class SignInScreenViewModel @Inject constructor(
             when (loginResult) {
                 is LoginResult.StatusSuccess -> {
                     _uiAction.trySend(SignInAction.NavToMainScreen)
+                    userRepository.setUserId(userId = userRepository.getUserId())
                 }
-                is LoginResult.StatusFailure -> {
+                LoginResult.StatusFailure -> {
                     _uiAction.trySend(SignInAction.ShowFailureMessage)
                 }
-                is LoginResult.StatusException -> {
+                LoginResult.StatusException -> {
                     _uiAction.trySend(SignInAction.ShowExceptionMessage)
                 }
             }

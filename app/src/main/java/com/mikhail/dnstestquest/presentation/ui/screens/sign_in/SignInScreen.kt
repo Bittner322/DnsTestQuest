@@ -51,14 +51,14 @@ fun SignInScreen(
                 is SignInAction.ShowExceptionMessage -> {
                     Toast.makeText(
                         context,
-                        "Unexpected exception",
+                        context.getString(R.string.sign_in_unexpected_exception_toast),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
                 is SignInAction.ShowFailureMessage -> {
                     Toast.makeText(
                         context,
-                        "Wrong email or password",
+                        context.getString(R.string.sign_in_wrong_login_or_password_toast),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
