@@ -12,4 +12,8 @@ class MainActivityViewModel @Inject constructor(
     fun checkIsUserLogged(): Boolean {
         return userRepository.isUserLogged()
     }
+
+    fun clearSharedPrefs() {
+        userRepository.clearSharedPrefs()
+    }
 }

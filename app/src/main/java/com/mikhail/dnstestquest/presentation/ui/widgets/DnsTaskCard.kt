@@ -20,13 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.firebase.Timestamp
 import com.mikhail.dnstestquest.R
 import com.mikhail.dnstestquest.data.models.Task
 import com.mikhail.dnstestquest.data.models.TaskStatus
 import com.mikhail.dnstestquest.presentation.ui.theme.DnsTheme
 import com.mikhail.dnstestquest.presentation.ui.theme.extensions.noRippleClickable
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.time.Instant
+import java.util.Date
 
 @Composable
 fun DnsTaskCard(
@@ -91,12 +92,13 @@ fun DnsTaskCard(
         Text(
             modifier = Modifier
                 .padding(
+                    start = 8.dp,
                     top = 4.dp,
-                    bottom = 8.dp
+                    bottom = 8.dp,
+                    end = 8.dp
                 )
                 .align(Alignment.CenterHorizontally),
-            text = "Создано ${DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                .format(task.created)}",
+            text = "Создано ${task.created}",
             style = DnsTheme.typography.title2,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
@@ -110,11 +112,10 @@ fun DnsTaskCardPreview() {
     DnsTheme {
         DnsTaskCard(
             task = Task(
-                id = "123",
                 title = "Убрать комнату",
                 description = "Мама попросила убраться перед приходом гостей",
                 status = TaskStatus.NEW,
-                created = LocalDateTime.now()
+                created = Timestamp(Date.from(Instant.now()))
             ),
             onTaskCardClick = { /*TODO*/ },
             onTaskStatusChange = { TODO() }

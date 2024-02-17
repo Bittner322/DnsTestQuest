@@ -22,7 +22,10 @@ fun RootNavigationGraph(
             SignInScreen(navController = navController)
         }
         composable(route = NavRoutes.home) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                navController = navController,
+                onLogout = onLogout
+            )
         }
         composable(route = NavRoutes.create_task) {
             CreateTaskScreen(navController = navController)

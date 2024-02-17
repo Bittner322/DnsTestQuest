@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     isUserLogged = viewModel.checkIsUserLogged(),
                     onLogout = {
+                        viewModel.clearSharedPrefs()
                         navController.navigate(NavRoutes.sign_in) {
                             popUpTo(0)
                         }

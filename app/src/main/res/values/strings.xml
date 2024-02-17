@@ -16,4 +16,11 @@
     <string name="home_task_status_new">Новое</string>
     <string name="home_task_created_at">Создано</string>
     <string name="home_tasks_count_title">Новых задач</string>
+    <string name="home_logout">Выйти</string>
+
+    <!-- Create Task Screen -->
+    <string name="create_task_topbar_title">Добавить задачу</string>
+    <string name="create_task_title_placeholder">Краткое описание</string>
+    <string name="create_task_description_placeholder">Описание</string>
+    <string name="create_task_add_task">Добавить</string>
 </resources>

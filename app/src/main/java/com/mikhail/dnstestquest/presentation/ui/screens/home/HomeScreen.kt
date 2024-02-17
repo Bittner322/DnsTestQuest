@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -30,17 +32,19 @@ import com.mikhail.dnstestquest.R
 import com.mikhail.dnstestquest.presentation.ui.main_activity.nav_graphs.NavRoutes
 import com.mikhail.dnstestquest.presentation.ui.theme.DnsTheme
 import com.mikhail.dnstestquest.presentation.ui.widgets.DnsCenterAlignedTopBar
+import com.mikhail.dnstestquest.presentation.ui.widgets.DnsSingleLineButton
 import com.mikhail.dnstestquest.presentation.ui.widgets.DnsTaskCard
 
 @Composable
 fun HomeScreen(
     navController: NavController,
+    onLogout: () -> Unit,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
     val tasks by viewModel.tasksFlow.collectAsState()
-    val tasksCount by viewModel.tasksCountFlow.collectAsState()
 
     LaunchedEffect(Unit) {
+        viewModel.onScreenComposed()
         viewModel.uiAction.collect {
             when (it) {
                 HomeScreenAction.NavToCreateTaskScreen -> {
@@ -85,8 +89,13 @@ fun HomeScreen(
         ) {
             item { 
                 Text(
-                    text = stringResource(R.string.home_tasks_count_title) + " $tasksCount",
-                    style = DnsTheme.typography.title2
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = stringResource(R.string.home_tasks_count_title) + " ${tasks.size}",
+                    style = DnsTheme.typography.title2,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
                 )
             }
             items(tasks) { task ->
@@ -94,6 +103,13 @@ fun HomeScreen(
                     task = task,
                     onTaskCardClick = { /*TODO*/ },
                     onTaskStatusChange = { /*TODO*/ }
+                )
+            }
+            item {
+                DnsSingleLineButton(
+                    enabled = true,
+                    text = stringResource(R.string.home_logout),
+                    onClick = onLogout
                 )
             }
         }

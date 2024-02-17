@@ -22,4 +22,11 @@ class UserRepository @Inject constructor(
     fun isUserLogged(): Boolean {
         return sharedPreferences.contains(USER_ID_SHARED_PREF)
     }
+
+    fun clearSharedPrefs() {
+        with(sharedPreferences.edit()) {
+            clear()
+            commit()
+        }
+    }
 }

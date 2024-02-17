@@ -30,7 +30,6 @@ class FirestoreRepository @Inject constructor(
                             .documents
                             .map {
                                 Task(
-                                    id = it.id,
                                     title = (it.data?.get("title") as? String).orEmpty(),
                                     description = (it.data?.get("description") as? String).orEmpty(),
                                     status = when (it.data?.get("status") as? String) {
