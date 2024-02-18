@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.mikhail.dnstestquest.presentation.ui.screens.create_task.CreateTaskScreen
 import com.mikhail.dnstestquest.presentation.ui.screens.home.HomeScreen
 import com.mikhail.dnstestquest.presentation.ui.screens.sign_in.SignInScreen
+import com.mikhail.dnstestquest.presentation.ui.screens.task_detalisation.TaskDetalizationScreen
 
 @Composable
 fun RootNavigationGraph(
@@ -29,6 +30,9 @@ fun RootNavigationGraph(
         }
         composable(route = NavRoutes.create_task) {
             CreateTaskScreen(navController = navController)
+        }
+        composable(route = "${NavRoutes.task}/{taskId}") {
+            TaskDetalizationScreen(navController = navController)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.mikhail.dnstestquest.di
+package com.mikhail.dnstestquest.di.modules
 
 import android.content.Context
 import android.content.SharedPreferences

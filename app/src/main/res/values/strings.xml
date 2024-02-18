@@ -16,11 +16,20 @@
     <string name="home_task_status_new">Новое</string>
     <string name="home_task_created_at">Создано</string>
     <string name="home_tasks_count_title">Новых задач</string>
+    <string name="home_tasks_start_task">В работу</string>
+    <string name="home_tasks_finish_task">Завершить</string>
+    <string name="home_tasks_remove_task">Удалить</string>
     <string name="home_logout">Выйти</string>
+    <string name="home_task_removing_failure">Не удалось удалить выбранную задачу</string>
+    <string name="home_task_status_changing_failure">Не удалось обновить статус задачи</string>
 
     <!-- Create Task Screen -->
     <string name="create_task_topbar_title">Добавить задачу</string>
     <string name="create_task_title_placeholder">Краткое описание</string>
     <string name="create_task_description_placeholder">Описание</string>
     <string name="create_task_add_task">Добавить</string>
+
+    <!-- Task Detalization Screen -->
+    <string name="detalization_topbar_title">Детализация задачи</string>
+    <string name="detalization_getting_task_failure">Не удалось получить задачу</string>
 </resources>

@@ -15,19 +15,21 @@ import com.mikhail.dnstestquest.presentation.ui.theme.defaults.DnsTopBarDefaults
 fun DnsCenterAlignedTopBar(
     text: String,
     modifier: Modifier = Modifier,
-    actions: @Composable RowScope.() -> Unit = {}
+    actions: @Composable RowScope.() -> Unit = {},
+    navigationIcon: @Composable () -> Unit = {}
 ) {
-   CenterAlignedTopAppBar(
-       modifier = modifier,
-       title = {
-           Text(
-               text = text,
-               color = DnsTheme.color.black,
-               style = DnsTheme.typography.title1,
-               overflow = TextOverflow.Ellipsis
-           )
-       },
-       actions = actions,
-       colors = DnsTopBarDefaults.topBarColors()
-   )
+    CenterAlignedTopAppBar(
+        modifier = modifier,
+        navigationIcon = navigationIcon,
+        title = {
+            Text(
+                text = text,
+                color = DnsTheme.color.black,
+                style = DnsTheme.typography.title1,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
+        actions = actions,
+        colors = DnsTopBarDefaults.topBarColors()
+    )
 }

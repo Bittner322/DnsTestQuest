@@ -1,4 +1,4 @@
-package com.mikhail.dnstestquest.di
+package com.mikhail.dnstestquest.di.modules
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
