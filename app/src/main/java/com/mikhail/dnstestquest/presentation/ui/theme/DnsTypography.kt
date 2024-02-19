@@ -12,14 +12,7 @@ data class DnsTypography(
     val largeTitle1: TextStyle,
     val title1: TextStyle,
     val title2: TextStyle,
-    val title3: TextStyle,
-    val title4: TextStyle,
-    val text1: TextStyle,
-    val caption1: TextStyle,
-    val buttonText1: TextStyle,
-    val buttonText2: TextStyle,
-    val elementText: TextStyle,
-    val priceText: TextStyle,
+    val buttonText: TextStyle,
     val placeholderText: TextStyle
 )
 
@@ -39,37 +32,9 @@ fun ProvideDnsTypography(): DnsTypography {
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp
         ),
-        title3 = TextStyle(
+        buttonText = TextStyle(
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp
-        ),
-        title4 = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 14.sp,
-        ),
-        text1 = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 12.sp,
-        ),
-        caption1 = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 10.sp,
-        ),
-        buttonText1 = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 12.sp
-        ),
-        buttonText2 = TextStyle(
-            fontWeight = FontWeight.Normal,
-            fontSize = 14.sp
-        ),
-        elementText = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 9.sp,
-        ),
-        priceText = TextStyle(
-            fontWeight = FontWeight.Medium,
-            fontSize = 24.sp
         ),
         placeholderText = TextStyle(
             fontWeight = FontWeight.Medium,

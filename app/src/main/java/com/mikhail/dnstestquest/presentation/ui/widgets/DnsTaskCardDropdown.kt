@@ -58,7 +58,7 @@ fun DnsTaskCardDropdown(
                 text = {
                     Text(
                         text = stringResource(R.string.home_tasks_start_task),
-                        style = DnsTheme.typography.title4,
+                        style = DnsTheme.typography.title2,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -73,7 +73,7 @@ fun DnsTaskCardDropdown(
                 text = {
                     Text(
                         text = stringResource(R.string.home_tasks_finish_task),
-                        style = DnsTheme.typography.title4,
+                        style = DnsTheme.typography.title2,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -88,7 +88,7 @@ fun DnsTaskCardDropdown(
                 text = {
                     Text(
                         text = stringResource(R.string.home_tasks_remove_task),
-                        style = DnsTheme.typography.title4,
+                        style = DnsTheme.typography.title2,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

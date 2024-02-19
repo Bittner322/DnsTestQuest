@@ -30,7 +30,7 @@ fun DnsSingleLineButton(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 8.dp),
-            style = DnsTheme.typography.buttonText2,
+            style = DnsTheme.typography.buttonText,
             text = text,
             overflow = TextOverflow.Ellipsis
         )

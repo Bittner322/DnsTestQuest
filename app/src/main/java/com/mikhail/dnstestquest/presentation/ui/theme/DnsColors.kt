@@ -11,7 +11,6 @@ data class DnsColors(
     val pink: Color,
     val lightPink: Color,
     val orange: Color,
-    val darkBlue: Color,
     val black: Color,
     val lightGreen: Color
 )
@@ -25,7 +24,6 @@ fun ProvideDnsColors(): DnsColors {
         pink = Color(0xFFD62F89),
         lightPink = Color(0xFFFF8AC9),
         orange = Color(0xFFF9A249),
-        darkBlue = Color(0xFF52606D),
         black = Color(0xFF000000),
         lightGreen = Color(0xFFD1FFBD)
     )
