@@ -1,5 +1,6 @@
 package com.mikhail.dnstestquest.presentation.ui.screens.create_task
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Timestamp
@@ -71,7 +72,7 @@ class CreateTaskScreenViewModel @Inject constructor(
                 task = Task(
                     title = taskTitle,
                     description = taskDescription,
-                    status = TaskStatus.NEW,
+                    statusState = mutableStateOf(TaskStatus.NEW),
                     created = Timestamp(Date.from(Instant.now()))
                 )
             )

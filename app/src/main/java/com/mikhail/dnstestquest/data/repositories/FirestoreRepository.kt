@@ -1,10 +1,12 @@
 package com.mikhail.dnstestquest.data.repositories
 
 import android.content.SharedPreferences
+import androidx.compose.runtime.mutableStateOf
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mikhail.dnstestquest.data.models.Task
 import com.mikhail.dnstestquest.data.models.TaskStatus
+import com.mikhail.dnstestquest.data.repositories.constants.CollectionsNames
 import java.time.Instant
 import java.util.Date
 import javax.inject.Inject
@@ -20,6 +22,9 @@ private const val STATUS_FIRESTORE_FIELD = "status"
 private const val CREATED_FIRESTORE_FIELD = "created"
 private const val LOGIN_FIRESTORE_FIELD = "login"
 private const val PASSWORD_FIRESTORE_FIELD = "password"
+
+private const val TASK_STATUS_DONE = "DONE"
+private const val TASK_STATUS_IN_PROGRESS = "IN_PROGRESS"
 
 class FirestoreRepository @Inject constructor(
     private val remoteDB: FirebaseFirestore,
@@ -42,15 +47,16 @@ class FirestoreRepository @Inject constructor(
                                         .orEmpty(),
                                     description = (it.data?.get(DESCRIPTION_FIRESOTORE_FIELD) as? String)
                                         .orEmpty(),
-                                    status = when (it.data?.get(STATUS_FIRESTORE_FIELD) as? String) {
-                                        "DONE" -> TaskStatus.DONE
-                                        "IN_PROGRESS" -> TaskStatus.IN_PROGRESS
-                                        else -> TaskStatus.NEW
+                                    statusState = when (it.data?.get(STATUS_FIRESTORE_FIELD) as? String) {
+                                        TASK_STATUS_DONE -> mutableStateOf(TaskStatus.DONE)
+                                        TASK_STATUS_IN_PROGRESS -> mutableStateOf(TaskStatus.IN_PROGRESS)
+                                        else -> mutableStateOf(TaskStatus.NEW)
                                     },
                                     created = (it.data?.get(CREATED_FIRESTORE_FIELD) as? Timestamp)
                                         ?: Timestamp(Date.from(Instant.now()))
                                 )
                             }
+                            .sortedByDescending { it.created }
                     )
                 }
                 .addOnFailureListener {
@@ -97,7 +103,7 @@ class FirestoreRepository @Inject constructor(
 
         taskData[TITLE_FIRESTORE_FIELD] = task.title
         taskData[DESCRIPTION_FIRESOTORE_FIELD] = task.description
-        taskData[STATUS_FIRESTORE_FIELD] = task.status.name
+        taskData[STATUS_FIRESTORE_FIELD] = task.statusState.value.name
         taskData[CREATED_FIRESTORE_FIELD] = Timestamp(Date.from(Instant.now()))
 
         return suspendCoroutine { continuation ->
@@ -174,10 +180,10 @@ class FirestoreRepository @Inject constructor(
                                 .orEmpty(),
                             description = (it.data?.get(DESCRIPTION_FIRESOTORE_FIELD) as? String)
                                 .orEmpty(),
-                            status = when (it.data?.get(STATUS_FIRESTORE_FIELD) as? String) {
-                                "DONE" -> TaskStatus.DONE
-                                "IN_PROGRESS" -> TaskStatus.IN_PROGRESS
-                                else -> TaskStatus.NEW
+                            statusState = when (it.data?.get(STATUS_FIRESTORE_FIELD) as? String) {
+                                TASK_STATUS_DONE -> mutableStateOf(TaskStatus.DONE)
+                                TASK_STATUS_IN_PROGRESS -> mutableStateOf(TaskStatus.IN_PROGRESS)
+                                else -> mutableStateOf(TaskStatus.NEW)
                             },
                             created = (it.data?.get(CREATED_FIRESTORE_FIELD) as? Timestamp)
                                 ?: Timestamp(Date.from(Instant.now()))

@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -33,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikhail.dnstestquest.R
 import com.mikhail.dnstestquest.data.models.Task
+import com.mikhail.dnstestquest.data.models.TaskStatus
 import com.mikhail.dnstestquest.presentation.ui.main_activity.nav_graphs.NavRoutes
 import com.mikhail.dnstestquest.presentation.ui.theme.DnsTheme
 import com.mikhail.dnstestquest.presentation.ui.widgets.DnsCenterAlignedTopBar
@@ -55,7 +56,11 @@ fun HomeScreen(
                 HomeScreenAction.NavToCreateTaskScreen -> {
                     navController.navigate(NavRoutes.create_task)
                 }
-                HomeScreenAction.NavToLoginScreen -> { onLogout() }
+
+                HomeScreenAction.NavToLoginScreen -> {
+                    onLogout()
+                }
+
                 HomeScreenAction.ShowRemovingFailureMessage -> {
                     Toast.makeText(
                         context,
@@ -63,6 +68,7 @@ fun HomeScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 HomeScreenAction.ShowTaskUpdatingFailureMessage -> {
                     Toast.makeText(
                         context,
@@ -70,6 +76,7 @@ fun HomeScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 is HomeScreenAction.NavToDetalizationScreen -> {
                     navController.navigate("${NavRoutes.task}/${it.taskId}")
                 }
@@ -114,17 +121,19 @@ fun HomeScreen(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    text = stringResource(R.string.home_tasks_count_title) + " ${tasks.size}",
+                    text = stringResource(R.string.home_tasks_count_title) + " ${
+                        tasks.filter { it.statusState.value == TaskStatus.NEW }.size
+                    }",
                     style = DnsTheme.typography.title2,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Center
                 )
             }
-            itemsIndexed(
+            items(
                 items = tasks,
-                key = { _: Int, item: Task -> item.id }
-            ) { index, task ->
+                key = { item: Task -> item.id }
+            ) {task ->
                 DnsTaskCard(
                     modifier = Modifier.animateItemPlacement(),
                     task = task,
@@ -132,12 +141,12 @@ fun HomeScreen(
                     onTaskStatusChangeClick = {
                         viewModel.onTaskStatusChangeClick(
                             task = task,
-                            taskStatus = it,
-                            index = index
+                            taskStatus = it
                         )
-                        viewModel.onScreenComposed()
                     },
-                    onTaskRemoveClick = { viewModel.onRemoveTaskClick(task) }
+                    onTaskRemoveClick = {
+                        viewModel.onRemoveTaskClick(task)
+                    }
                 )
             }
             item {

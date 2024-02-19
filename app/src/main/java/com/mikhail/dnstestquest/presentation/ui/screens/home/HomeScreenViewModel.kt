@@ -66,8 +66,7 @@ class HomeScreenViewModel @Inject constructor(
 
     fun onTaskStatusChangeClick(
         task: Task,
-        taskStatus: TaskStatus,
-        index: Int
+        taskStatus: TaskStatus
     ) {
         viewModelScope.launch {
             val taskStatusChangeResult = firestoreRepository.updateUserTaskStatus(
@@ -81,7 +80,7 @@ class HomeScreenViewModel @Inject constructor(
                     _uiAction.trySend(HomeScreenAction.ShowTaskUpdatingFailureMessage)
                 }
                 UpdateTaskResult.UpdateSuccess -> {
-                    _tasksFlow.value[index] = _tasksFlow.value[index].copy(status = taskStatus)
+                    task.statusState.value = taskStatus
                 }
             }
         }

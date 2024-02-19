@@ -1,4 +1,4 @@
-package com.mikhail.dnstestquest.data.repositories
+package com.mikhail.dnstestquest.data.repositories.constants
 
 object CollectionsNames {
     val USERS = "users"

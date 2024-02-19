@@ -1,5 +1,7 @@
 package com.mikhail.dnstestquest.data.models
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 
@@ -8,7 +10,7 @@ data class Task(
     val id: String = "",
     val title: String,
     val description: String,
-    val status: TaskStatus,
+    val statusState: MutableState<TaskStatus>,
     val created: Timestamp
 ) {
     companion object {
@@ -16,7 +18,7 @@ data class Task(
             id = "",
             title = "",
             description = "",
-            status = TaskStatus.NEW,
+            statusState = mutableStateOf(TaskStatus.NEW),
             created = Timestamp.now()
         )
     }
